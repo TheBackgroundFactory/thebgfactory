@@ -100,7 +100,7 @@ function runDots() {
         e.pageY -= html.clientTop || 0
       }
   }
-  document.onmousemove = function(e) 
+  canvas.onmousemove = function(e) 
   {
       e = e || window.event
       fixPageXY(e)

@@ -4,21 +4,21 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 body a{
-	color: white;
+	color: #F8F8F8;
 	transition: color 0.5s;
 }
-body a:hover {
+body a:hover, a:focus {
 	color: gray;
 	text-decoration: none;
 }
 h1 {
-	color: white;
+	color: #F8F8F8;
 	padding-bottom: 0.75em;
 }
 body {
 	background-color: #222222;
     padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    color: #CCCCCC;
+    color: #F8F8F8;
     font-family: 'Abel', cursive;
 }
 
@@ -38,10 +38,10 @@ footer {
 	font-size: 0.75em;
 }
 
-canvas {
+canvas, .pseudocanvas {
 	width: 100%;
 	height: auto;
 	/*border-radius: 10px;*/
-	border: 3px solid #111111;
+	border: 3px solid #F8F8F8;
 	/*box-shadow: 0px 0px 50px rgba(0,0,0,0.5);*/
 }
