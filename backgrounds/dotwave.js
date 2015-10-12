@@ -3,8 +3,18 @@ function runWaves() {
     var canvas = document.getElementById("canvas3");
     var ctx = canvas.getContext('2d');
 
-    var w = canvas.width = window.innerWidth
-    var h = canvas.height = window.innerHeight
+
+
+    var self = document.getElementById('scr_back')
+    if (self) {
+      if ( self.classList[0] == "fullscreen") {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;  
+      }
+    }
+
+    var w = canvas.width;
+    var h = canvas.height
 
     // Variable parameters
     var dotDistance = 140 // Pixels between dots 
@@ -35,18 +45,6 @@ function runWaves() {
         draw()
     }
 
-    function fixPageXY(e) {
-      if (e.pageX == null && e.clientX != null ) { 
-        var html = document.documentElement
-        var body = document.body
-
-        e.pageX = e.clientX + (html.scrollLeft || body && body.scrollLeft || 0)
-        e.pageX -= html.clientLeft || 0
-        
-        e.pageY = e.clientY + (html.scrollTop || body && body.scrollTop || 0)
-        e.pageY -= html.clientTop || 0
-      }
-    }
 
     function draw() {
       var t = (new Date()).getMilliseconds()+1000*(((new Date()).getSeconds())%dotPeriod)

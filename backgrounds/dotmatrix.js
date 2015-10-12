@@ -8,16 +8,20 @@ function runDots() {
   var LIGHTNESS = 100 //Lightness of each node
   var LIGHTNESS_V = 155 //Random variance in lightness
   var TYPE = "circle" //Type of node, "circle" or "square"
-  var FULLSCREEN = false //whether the background takes the fullpage or not.
+ //whether the background takes the fullpage or not.
   var SIZE = 5 //radius of the dot
   ///////////////////////////////
 
   var msX
   var msY
   var canvas = document.getElementById("canvas1")
-  if (FULLSCREEN) {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;  
+
+  var self = document.getElementById('scr_back')
+  if (self) {
+    if ( self.classList[0] == "fullscreen") {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;  
+    }
   }
   var surface = canvas.getContext("2d")
 
@@ -70,48 +74,28 @@ function runDots() {
   	surface.fillRect(0,0,canvas.width,canvas.height)
   }
 
-  // window.addEventListener('resize', function() {
-  //   canvas.width = window.innerWidth;
-  //   canvas.height = window.innerHeight;
-  // });
 
-  // document.body.addEventListener('mousemove', function(e) {
-  //   msX = e.clientX;
-  //   msY = e.clientY;
-  //   draw();
-  //   for (var i=0; i<columns; i++) {
-  //     for (var j=0; j<rows; j++) {
-  //       nodeList[i][j].draw()
-  //     }
-  //   }
-  // });
-
-  function fixPageXY(e)
-  {
-    if (e.pageX == null && e.clientX != null ) 
-    { 
-        var html = document.documentElement
-        var body = document.body
-
-        e.pageX = e.clientX + (html.scrollLeft || body && body.scrollLeft || 0)
-        e.pageX -= html.clientLeft || 0
-
-        e.pageY = e.clientY + (html.scrollTop || body && body.scrollTop || 0)
-        e.pageY -= html.clientTop || 0
+  function update(e) {
+    if (e.type == 'touchmove') {
+      e.preventDefault();
+      msX = e.touches[0].pageX;
+      msY = e.touches[0].pageY;      
+    }
+    else {
+      msX = e.clientX;
+      msY = e.clientY;
+    }
+    draw();
+    for (var i=0; i<columns; i++) {
+      for (var j=0; j<rows; j++) {
+        nodeList[i][j].draw()
       }
+    }
   }
-  canvas.onmousemove = function(e) 
-  {
-      e = e || window.event
-      fixPageXY(e)
-      msX = e.pageX;
-      msY = e.pageY-100;
-      draw();
-      for (var i=0; i<columns; i++) {
-        for (var j=0; j<rows; j++) {
-          nodeList[i][j].draw()
-        }
-      }
-  }
+
+  draw()
+  canvas.addEventListener('mousemove', update);
+  canvas.addEventListener('touchmove', update);
+
 }
 runDots()

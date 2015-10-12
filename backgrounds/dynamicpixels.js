@@ -1,44 +1,41 @@
-			//Variables To Change For Customization
+//Variables To Change For Customization
 
-			/*
-			Change Color of Background by altering rgb values at 1)
-			Change Color of Pixels by altering rgb values at 2)
-			Alter Pixel Shape at 3) see canvas2 for more info
-			Change Function the is graphed at 4) Note Current Function depends on mouse position
-			*/
+/*
+Change Color of Background by altering rgb values at 1)
+Change Color of Pixels by altering rgb values at 2)
+Alter Pixel Shape at 3) see canvas2 for more info
+Change Function the is graphed at 4) Note Current Function depends on mouse position
+*/
+
 function runLinear() {
 
 	var canvas2 = document.getElementById("canvas2");
 	var ctx = canvas2.getContext('2d');
 
-	// function init()
-	// {
- //        window.requestAnimationFrame(draw2(0,0));
-	// }
-	function fixPageXY(e)
-	{
-		if (e.pageX == null && e.clientX != null ) 
-		{ 
-			var html = document.documentElement
-				var body = document.body
+	var self = document.getElementById('scr_back')
+	if (self) {
+	    if ( self.classList[0] == "fullscreen") {
+	      canvas2.width = window.innerWidth;
+	      canvas2.height = window.innerHeight;  
+	    }
+	 }
 
-			e.pageX = e.clientX + (html.scrollLeft || body && body.scrollLeft || 0)
-			e.pageX -= html.clientLeft || 0
+	function update(e) {
+		if (e.type == 'touchmove') {
+	      e.preventDefault();
+	      msX = e.touches[0].pageX;
+	      msY = e.touches[0].pageY;      
+	    }
+	    else {
+	      msX = e.clientX;
+	      msY = e.clientY;
+	    }
+	    toCart(msX,msY)
+	}
 
-				e.pageY = e.clientY + (html.scrollTop || body && body.scrollTop || 0)
-			e.pageY -= html.clientTop || 0
-			}
-	}
-	canvas2.onmousemove = function(e) 
-	{
-			e = e || window.event
-			fixPageXY(e)
-			toCart(e.pageX,e.pageY)
-			//console.log("X Pos: " + e.pageX + ", Y Pos: "+ e.pageY);  //Use this to output X and Y position of mouse
-	}
 	function toCart (x,y)
 	{
-		zeroX = canvas2.width/2
+			zeroX = canvas2.width/2
 			zeroY = canvas2.height/2
 			cartX = x+zeroX
 			cartY = y+zeroY
@@ -70,5 +67,9 @@ function runLinear() {
 	  }
 	  //ctx.fillRect(x-10,y-10,10,10);
 	}
+
+	toCart(0,0)
+	document.body.addEventListener('mousemove',update);
+	document.body.addEventListener('touchmove',update)
 }
 runLinear()
