@@ -70,6 +70,6 @@ function runLinear() {
 
 	toCart(0,0)
 	canvas2.addEventListener('mousemove',update);
-	canvas2.body.addEventListener('touchmove',update)
+	canvas2.addEventListener('touchmove',update)
 }
 runLinear()
