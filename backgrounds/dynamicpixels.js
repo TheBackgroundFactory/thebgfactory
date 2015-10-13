@@ -69,7 +69,7 @@ function runLinear() {
 	}
 
 	toCart(0,0)
-	document.body.addEventListener('mousemove',update);
-	document.body.addEventListener('touchmove',update)
+	canvas2.addEventListener('mousemove',update);
+	canvas2.body.addEventListener('touchmove',update)
 }
 runLinear()
